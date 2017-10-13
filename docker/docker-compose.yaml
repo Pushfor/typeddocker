@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+    node:
+        build:
+            context: ./compose/app
+        container_name: app
+        restart: always
+        env_file:
+            - ./compose/.env
+        environment:
+            - PUSHFOR_VENDOR=pushfor
+        ports:
+            - "3003:3003"
+#         volumes:
+#             - "../volumes/dist:/src"
+#             - "../volumes/dist:/dist"
+    

@@ -1,5 +1,7 @@
 # Typeddocker
 
+This repository is still under development and not ready for reuse. 
+
 > Docker + Yarn + Electron + Gulp + TypeScript
 
 ## Goal
@@ -27,6 +29,43 @@
      * because [React vs Angular vs Vue 2017](https://medium.com/unicorn-supplies/angular-vs-react-vs-vue-a-2017-comparison-c5c52d620176)
      * because you can choose one or few or all
 
+## Usage
+
+```bash
+docker-compose up -d
+```
+
+## Contribute
+
+ * fork -> code -> test -> PR -> merge -> repeat
+ * be constructive
+ 
+## Structure
+
+```
+/docker
+  /compose
+    /app
+      /src
+        /apps
+          /angular - TBD, example, deployed to public/angular
+          /electron - TBD< electron node process
+          /express - express server app
+          /react - TBD, example, deployed to public/react
+          /vanilla - example, deployed to public
+          /vue - example, deployed to public/vue
+        /node_modules - not checked in, shared for all projects
+        gulpfile.js
+        package.json
+        tsconfig.json
+        yarn.lock
+      /Dockerfile
+    /nginx - tbd
+    .env - to be excluded from the repo
+    .env.json - to be exluded from the repo
+/volumes
+```
+
 ## Use cases
 
  * App is composed of:
@@ -47,7 +86,8 @@ I                      |             I
 I |------|  1-n |-------------|      I
 I | Gulp |----->| HTML/JS/CSS |      I
 I |------|      |-------------|      I
-I                                    I
+I     ^                              I
+I     |                              I
 I |--------------------------------| I
 I | Source: TypeScript, Scss, HTML | I
 I |--------------------------------| I
@@ -58,11 +98,12 @@ I====================================I
  * Source is tranformed on startup by gulp tasks
  * Dist files are served by express
  * Microservices are exposed by express
+   * Thanks to express we can do serverside rendering
 
 ### Electron application
 ```
 I====================================I
-I Electron                           I
+I Electron executab                  I
 I               |-------------|      I
 I          /--->|     Main    |<--> microservices
 I          |    |-------------|      I
@@ -73,14 +114,17 @@ I          |/-->| HTML/JS/CSS |      I
 I          |    |-------------|      I
 I==========|=========================I
            |         
-        |------|
-        | Gulp |
-        |------|
-           ^
-           |
-  |--------------------------------| 
-  | Source: TypeScript, Scss, HTML | 
-  |--------------------------------| 
+I==========|=========================I    
+I Docker   |                         I       
+I       |------|                     I
+I       | Gulp |                     I
+I       |------|                     I
+I          ^                         I
+I          |                         I
+I |--------------------------------| I
+I | Source: TypeScript, Scss, HTML | I
+I |--------------------------------| I
+I====================================I
 
 ```
 
@@ -97,9 +141,9 @@ I Docker               |---------|   I
 I                    /-| Express |   I
 I         / \       /  |---------|   I
 I     web/desktop -<                 I
-I         \ /       \  |----------|  I
-I          ^         \-| Electron |  I
-I          |           |----------|  I
+I         \ /       \                I     |----------|  
+I          ^         \---------------------| Electron |  
+I          |                         I     |----------|  
 I    |-------------|                 I
 I    | HTML/JS/CSS |                 I
 I    |-------------|                 I
@@ -114,18 +158,6 @@ I |--------------------------------| I
 I | Source: TypeScript, Scss, HTML | I
 I |--------------------------------| I
 I====================================I
-```
-
-or if possible
-
-```
-                          I-----------------I
-                        /-I Electron Docker I
-I===============I      /  I-----------------I
-I Source Docker I<|---<
-I===============I      \  I-----------------I
-                        \-I Express Docker  I
-                          I-----------------I
 ```
 
  * Docker
@@ -150,3 +182,27 @@ I===============I      \  I-----------------I
      * as above
    * Expose microservices
      * use electron `ipc` protocol   
+
+## Licence
+
+MIT License
+
+Copyright (c) 2017-present, Pushfor Limited.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
