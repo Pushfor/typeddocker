@@ -1,34 +1,12 @@
 const gulp = require('gulp');
-const typescript = require('gulp-typescript');
-const htmlmin = require('gulp-htmlmin');
-const rename = require('gulp-rename');
 
-/**
- * Transpiles TypeScript for given paths
- * @param {string} source 
- * @param {string} dest 
- */
-function ts(source) {
-    const project = typescript.createProject('./tsconfig.json');
-    return tsResult = gulp
-        .src(source)
-        .pipe(project());
-}
+// Load gulp config for all apps
+require('./apps/express/gulpfile');
+require('./apps/vanilla/gulpfile');
+require('./apps/angular/gulpfile');
+require('./apps/react/gulpfile');
 
-gulp.task('express', () => {
-    return ts('./apps/express/index.ts').js.pipe(gulp.dest('./build/express'));
-});
-
-gulp
-    .task('vanilla:html', () => gulp
-        .src('./apps/vanilla/index.html')
-        .pipe(htmlmin({ collapseWhitespace: true }))
-        .pipe(gulp.dest('./build/public')));
-
-gulp
-    .task('vanilla:js', () => ts('./apps/vanilla/js/*.ts').js.pipe(rename('index.min.js')).pipe(gulp.dest('./build/public/js')));
-
-gulp
-    .task('vanilla', ['vanilla:html', 'vanilla:js']);
-
-gulp.task('default', ['express', 'vanilla']);
+// Setup main tasks
+// see ../override.start.sh and ../Dockerfile for details
+gulp.task('default', ['express', 'vanilla', 'angular', 'react']);
+gulp.task('watch', ['express:watch', 'vanilla:watch', 'angular:watch', 'react:watch']);

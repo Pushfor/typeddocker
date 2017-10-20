@@ -1,0 +1,53 @@
+---
+# based on https://github.com/douglasduteil/study-docker-node-express-mysql
+git:
+  depth: 1
+sudo: false
+language: node_js
+# cache:
+#  directories:
+#  - docker/compose/app/src/node_modules
+env:
+  global:
+    - COVERAGE=false
+    - INTEGRATION=false
+matrix:
+  allow_failures:
+    - node_js: '3'
+    - node_js: '2'
+    - node_js: '1'
+    - node_js: '0'
+  fast_finish: true
+  include:
+    #
+    - node_js: node
+    - node_js: '6'
+    - node_js: '5'
+    - node_js: '4'
+    - node_js: '3'
+    - node_js: '2'
+    - node_js: '1'
+    - node_js: '0'
+    #
+    - node_js: node
+      env:
+        - COVERAGE=true
+    #
+    - node_js: node
+      env:
+        - INTEGRATION=true
+      sudo: required
+      services:
+        - docker
+before_install:
+  # Force Docker Compose $DOCKER_COMPOSE_VERSION
+  # https://docs.travis-ci.com/user/docker/
+  - "[ $INTEGRATION == false ] || sudo ./.travis/force-docker-compose.sh"
+  - "[ $INTEGRATION == false ] || cd docker/compose; docker-compose build --no-cache"
+  
+script:
+  - "[ $INTEGRATION == false ] || docker-compose run test"
+  - "[ $INTEGRATION == true ] || npm test"
+
+after_script:
+  - "[ $COVERAGE == false ] || ./.travis/extract-coverage.sh"

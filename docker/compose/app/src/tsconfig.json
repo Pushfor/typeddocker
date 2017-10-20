@@ -1,15 +1,31 @@
 {
     "compilerOptions": {
+        "typeRoots" : ["./node_modules/@types"],
+        "types" : [
+            "node", 
+            "lodash", 
+            "express",
+            "morgan",
+            "react",
+            "react-dom",
+            "react-redux"
+        ],
         "module": "commonjs",
         "target": "es5",
         "noImplicitAny": false,
+        "experimentalDecorators": true,
+        "jsx": "preserve",
         "sourceMap": true,
         "lib" : [
             "es5",
             "es2015",
             "es2017",
             "dom",
-            "Scripthost"
+            "scripthost"
         ]
-    }
+    },
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
+    ]
 }
