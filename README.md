@@ -32,7 +32,8 @@ This repository is still under development and not ready for reuse.
 ## Usage
 
 ```bash
-docker-compose up -d
+cd docker
+./restart.deamon.sh
 ```
 
 ## Contribute
@@ -73,6 +74,20 @@ docker-compose up -d
    * `frontend` which can be one or many applicaitons using one or many frameworks
      * applications are distributed across folders
      * applicaitons share cookies/localstorage because of the same domain/process
+
+## To Do
+
+[x] Docker
+[x] Gulp
+[x] Sass
+[ ] Vanilla
+[x] Angular
+[ ] React
+[ ] Vue
+[ ] Jasmine
+[ ] Travis
+[ ] Protractor
+[ ] Istanbul
 
 ### Web application
 ```

@@ -1,7 +1,11 @@
-version: '2'
+version: '3.2'
 
 services:
     node:
+        stdin_open: true
+        tty: true
+        restart: always
+
         build:
             context: ./compose/app
         container_name: app
@@ -12,7 +16,9 @@ services:
             - PUSHFOR_VENDOR=pushfor
         ports:
             - "3003:3003"
-#         volumes:
-#             - "../volumes/dist:/src"
-#             - "../volumes/dist:/dist"
-    
+        volumes:
+            - 
+                type: volume
+                source: ./compose/app/src
+                target: /org-src
+                    

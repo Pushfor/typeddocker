@@ -1,20 +1,15 @@
-import * as express from 'express';
-import * as fs from 'fs';
+import * as forever from "forever-monitor";
 
-// Constants
-const PORT = 3003;
-const HOST = '0.0.0.0';
-
-// App
-const app = express();
-app.use(express.static('./build/public', {
-  index: 'index.html'
-}));
-
-app.listen(PORT, HOST);
-
-fs.readdir('./build/public/js', (error, list) => {
-  console.log(list);
+const child = new (forever.Monitor)(__dirname + "/server.js", {
+  args: [],
+  max: 3,
+  silent: true,
+  watch: true,
+  watchDirectory: __dirname,
 });
 
-console.log(`Running on http://${HOST}:${PORT}`);
+child.on("exit", () => {
+  // console.log("server.js has exited after 3 restarts");
+});
+
+child.start();
