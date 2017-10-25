@@ -17,6 +17,6 @@ app.use(express.static("../build/public", {
   index: "index.html",
 }));
 
-app.get("/hello", (req, res) => res.send('hi there'));
+app.get("/hello", (req, res) => res.send("hi there"));
 
 app.listen(PORT, HOST);

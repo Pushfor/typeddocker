@@ -4,11 +4,8 @@ const test = async () => {
 };
 
 test().then(() => {
-    const sass = require('../scss/component.scss');
-    const style = document.createElement('style');
+    const sass = require("../scss/component.scss");
+    const style = document.createElement("style");
     style.innerHTML = sass;
-    document.body.appendChild(style);    
+    document.body.appendChild(style);
 });
-
-
-
