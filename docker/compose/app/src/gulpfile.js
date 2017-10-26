@@ -8,5 +8,5 @@ require('./apps/react/gulpfile');
 
 // Setup main tasks
 // see ../override.start.sh and ../Dockerfile for details
-gulp.task('default', ['express', 'vanilla', 'angular', 'react']);
+gulp.task('default', ['express', 'vanilla', 'angular', 'react', 'angular:aot']);
 gulp.task('watch', ['express:watch', 'vanilla:watch', 'angular:watch', 'react:watch']);
