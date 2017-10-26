@@ -32,7 +32,11 @@ module.exports = (name, options) => {
 
     if (!name || !options) return;
 
-    jobs = [];
+    let jobs = [];
+
+    if(options.require) {
+        jobs = jobs.concat(options.require);
+    }
 
     // HTML
     if (options.html) {
@@ -57,7 +61,7 @@ module.exports = (name, options) => {
                 }
 
                 return Promise
-                    .all(options.js.src.map((src, index) => browserify(src, bundles[index], options.js.options, options.js.options)
+                    .all(options.js.src.map((src, index) => browserify(src, bundles[index], options.js.options, options.js.options, options.typescript)
                         .pipe(gulp.dest(options.js.dest))));
             });
     }
@@ -106,11 +110,23 @@ module.exports = (name, options) => {
     // Rebuild
     gulp
         .task(name + ':rebuild', done => {
+            if(options.copy === false) {
+                gulpSequence(name)(done);    
+                return;
+            }
             gulpSequence(name + ':copy', name)(done);
         });
 
-    // Build
+    // Build    
+
+    if(options.after) {
+        jobs = jobs.concat(options.after);
+    }
+
+
     gulp
-        .task(name, jobs);
+        .task(name, done => {
+            gulpSequence(...jobs)(done);
+        });
 
 };

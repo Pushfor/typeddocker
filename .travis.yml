@@ -1,53 +1,45 @@
 ---
-# based on https://github.com/douglasduteil/study-docker-node-express-mysql
-git:
-  depth: 1
-sudo: false
-language: node_js
-# cache:
-#  directories:
-#  - docker/compose/app/src/node_modules
-env:
-  global:
-    - COVERAGE=false
-    - INTEGRATION=false
-matrix:
-  allow_failures:
-    - node_js: '3'
-    - node_js: '2'
-    - node_js: '1'
-    - node_js: '0'
-  fast_finish: true
-  include:
-    #
-    - node_js: node
-    - node_js: '6'
-    - node_js: '5'
-    - node_js: '4'
-    - node_js: '3'
-    - node_js: '2'
-    - node_js: '1'
-    - node_js: '0'
-    #
-    - node_js: node
-      env:
-        - COVERAGE=true
-    #
-    - node_js: node
-      env:
-        - INTEGRATION=true
-      sudo: required
-      services:
-        - docker
-before_install:
-  # Force Docker Compose $DOCKER_COMPOSE_VERSION
-  # https://docs.travis-ci.com/user/docker/
-  - "[ $INTEGRATION == false ] || sudo ./.travis/force-docker-compose.sh"
-  - "[ $INTEGRATION == false ] || cd docker/compose; docker-compose build --no-cache"
-  
-script:
-  - "[ $INTEGRATION == false ] || docker-compose run test"
-  - "[ $INTEGRATION == true ] || npm test"
+sudo: required
+dist: trusty
 
-after_script:
-  - "[ $COVERAGE == false ] || ./.travis/extract-coverage.sh"
+install:
+  # Update docker-engine using Ubuntu 'trusty' apt repo
+  - >
+    curl -sSL "https://get.docker.com/gpg" |
+     sudo -E apt-key add -
+  - >
+    echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" |
+     sudo tee -a /etc/apt/sources.list
+  - sudo apt-get update
+  - >
+    sudo apt-get -o Dpkg::Options::="--force-confdef" \
+     -o Dpkg::Options::="--force-confold" --assume-yes install docker-engine \
+     --allow-unauthenticated
+  - docker version
+  # Update docker-compose via pip
+  - sudo pip install docker-compose
+  - docker-compose version
+
+before_cache:
+  # Save tagged docker images
+  - >
+    mkdir -p $HOME/docker && docker images -a --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
+    | xargs -n 2 -t sh -c 'test -e $HOME/docker/$1.tar.gz || docker save $0 | gzip -2 > $HOME/docker/$1.tar.gz'
+
+cache:
+  directories:
+    - $HOME/docker
+
+before_install:
+  # Load cached docker images
+  - if [[ -d $HOME/docker ]]; then ls $HOME/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi  
+
+before_script:
+  - cd docker
+  - touch ./compose/.env
+  - chmod +x ../travis.test.sh
+  - docker-compose down
+  - docker-compose build # --no-cache
+
+script:
+  - ../travis.test.sh

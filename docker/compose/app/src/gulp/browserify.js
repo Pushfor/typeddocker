@@ -19,19 +19,23 @@ const scssify = require('scssify');
  * @param {object} config
  * @param {object} tsConfig
  */
-module.exports = (entry, outname, config, tsConfig) => {
+module.exports = (entry, outname, config, tsConfig, useTs) => {
 
     let bundleConfig = {
         entries: [entry],
         debug: true,
         extension: ['.ts'],
+        exclude: ['*.aot.ts'],
         outputName: outname
     };
 
     let tsifyConfig = {
         noImplicitAny: false,
         project: __dirname + '/../../tsconfig.json',
-        typescript: typescript
+        typescript: typescript,
+        exclude: [
+            '*.aot.ts'
+        ]
     };
 
     if (config) {
@@ -41,7 +45,7 @@ module.exports = (entry, outname, config, tsConfig) => {
         tsifyConfig = _.assign({}, tsifyConfig, tsConfig);
     }
 
-    const b = browserify(bundleConfig)        
+    let b = browserify(bundleConfig)
         .transform(scssify, {
             // Disable/enable <style> injection; true by default
             autoInject: false,
@@ -90,8 +94,11 @@ module.exports = (entry, outname, config, tsConfig) => {
                 }
             }
         })
-        .transform(stringify(['.html', '.css']))
-        .plugin(tsify, tsifyConfig)
+        .transform(stringify(['.html', '.css']));
+
+    if (useTs !== false) {
+        b = b.plugin(tsify, tsifyConfig);
+    }
 
     b.on('log', gutil.log);
     b.on('error', gutil.log);

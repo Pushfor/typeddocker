@@ -89,12 +89,14 @@
     "har-schema": "2.0.0",
     "node-sass": "4.5.3",
     "first-chunk-stream": "2.0.0",
-    "strip-bom-stream": "2.0.0"
+    "strip-bom-stream": "2.0.0",
+    "rimraf": "2.6.2"
   },
   "dependencies": {
     "@angular/animations": "^4.2.4",
     "@angular/common": "^4.2.4",
     "@angular/compiler": "^4.2.4",
+    "@angular/compiler-cli": "^4.4.6",
     "@angular/core": "^4.2.4",
     "@angular/forms": "^4.2.4",
     "@angular/http": "^4.2.4",
@@ -122,6 +124,7 @@
     "gulp-htmlmin": "^3.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
+    "gulp-rimraf": "^0.2.1",
     "gulp-sass": "^3.1.0",
     "gulp-sequence": "^0.4.6",
     "gulp-sourcemaps": "^2.6.1",
@@ -138,6 +141,7 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
+    "rimraf": "^2.6.2",
     "rxjs": "^5.4.2",
     "scssify": "https://github.com/sielay/scssify.git#raw",
     "stringify": "^5.1.0",

@@ -1,9 +1,11 @@
 {
     "compilerOptions": {
-        "typeRoots" : ["./node_modules/@types"],
-        "types" : [
-            "node", 
-            "lodash", 
+        "typeRoots": [
+            "./node_modules/@types"
+        ],
+        "types": [
+            "node",
+            "lodash",
             "express",
             "morgan",
             "react",
@@ -16,7 +18,7 @@
         "experimentalDecorators": true,
         "jsx": "preserve",
         "sourceMap": true,
-        "lib" : [
+        "lib": [
             "es5",
             "es2015",
             "es2017",

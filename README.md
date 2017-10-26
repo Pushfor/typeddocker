@@ -1,5 +1,7 @@
 # Typeddocker
 
+[![Build Status](https://travis-ci.org/Pushfor/typeddocker.svg?branch=master)](https://travis-ci.org/Pushfor/typeddocker)
+
 This repository is still under development and not ready for reuse. 
 
 > Docker + Yarn + Electron + Gulp + TypeScript
@@ -81,7 +83,8 @@ cd docker
 [x] Gulp
 [x] Sass
 [ ] Vanilla
-[x] Angular
+[x] Angular 4
+[x] Angular 4 AOT
 [ ] React
 [ ] Vue
 [ ] Jasmine
