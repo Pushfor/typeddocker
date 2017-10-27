@@ -38,12 +38,12 @@ before_script:
   - cd docker
   - touch ./compose/.env
   - chmod +x ../travis.test.sh
-  - docker-compose down
+  - docker-compose down  
   - docker-compose -f ./docker-compose.electron.yaml build
   - docker-compose -f ./docker-compose.electron.yaml up 
+  - sudo chmod 777 -R ./compose/app/.build 
   - cp ./compose/app/.build/electron/desktop.js ./compose/app/.build/public/main.js
   - cp ./compose/app/src/package.json ./compose/app/.build/public  
-  # - electron build ./compose/app/.build/public To do dependencies
 
 script:
   - ../travis.test.sh
