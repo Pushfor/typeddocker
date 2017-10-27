@@ -9,7 +9,7 @@ services:
         build:
             context: ./compose/app
             args:
-                START_SCRIPT=./override.start.dev.sh
+                - START_SCRIPT=./override.start.dev.sh
         container_name: app
         restart: always
         env_file:
@@ -21,6 +21,3 @@ services:
                 type: volume
                 source: ./compose/app/src
                 target: /org-src                    
-        argument:
-            - ARGUMENT_1=gulp watch &
-
