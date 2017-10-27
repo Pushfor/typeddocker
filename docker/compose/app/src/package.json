@@ -111,6 +111,7 @@
     "@angular/router": "^4.2.4",
     "@types/electron": "^1.6.10",
     "@types/forever-monitor": "^1.7.2",
+    "@types/jquery": "^3.2.15",
     "@types/lodash": "^4.14.78",
     "@types/morgan": "^1.7.33",
     "@types/prop-types": "^15.5.2",
