@@ -125,6 +125,7 @@
     "enhanced-resolve": "^3.4.1",
     "express": "^4.16.2",
     "global": "^4.3.2",
+    "golden-layout": "^1.5.9",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-cli": "^1.4.0",
