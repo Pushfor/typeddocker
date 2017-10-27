@@ -57,3 +57,4 @@ typings/
 # dotenv environment variables file
 .env
 /docker/compose/app/build
+/docker/compose/app/.build

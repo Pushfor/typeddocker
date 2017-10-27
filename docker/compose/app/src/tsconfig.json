@@ -10,7 +10,8 @@
             "morgan",
             "react",
             "react-dom",
-            "react-redux"
+            "react-redux",
+            "electron"
         ],
         "module": "commonjs",
         "target": "es5",

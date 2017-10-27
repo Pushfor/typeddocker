@@ -39,7 +39,11 @@ before_script:
   - touch ./compose/.env
   - chmod +x ../travis.test.sh
   - docker-compose down
-  - docker-compose build # --no-cache
+  - docker-compose -f ./docker-compose.electron.yaml build
+  - docker-compose -f ./docker-compose.electron.yaml up 
+  - cp ./compose/app/.build/electron/desktop.js ./compose/app/.build/public/main.js
+  - cp ./compose/app/src/package.json ./compose/app/.build/public  
+  # - electron build ./compose/app/.build/public To do dependencies
 
 script:
   - ../travis.test.sh

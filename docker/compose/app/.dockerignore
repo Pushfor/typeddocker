@@ -2,3 +2,4 @@
 *.ngsummary.json
 *.shim.ngstyle.ts
 .tmp
+.build

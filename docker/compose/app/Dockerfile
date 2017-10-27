@@ -1,12 +1,17 @@
 FROM node:8
 
 COPY ./src /src
-COPY ./override.start.sh /start.sh
+ARG START_SCRIPT
+RUN echo ${START_SCRIPT}
+COPY ${START_SCRIPT} /start.sh
+RUN ls /start.sh
+RUN cat /start.sh
 RUN rm -rf /src/node_modules
 WORKDIR /src
 
 EXPOSE 3003 
 VOLUME /org-src
+VOLUME /dist
 
 RUN yarn global add gulp
 
