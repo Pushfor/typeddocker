@@ -9,7 +9,7 @@ services:
         build:
             context: ./compose/app
             args:
-                - START_SCRIPT=./override.start.dev.sh
+              - START_SCRIPT=./override.export.sh
         container_name: app
         restart: always
         env_file:
@@ -19,5 +19,6 @@ services:
         volumes:
             - 
                 type: volume
-                source: ./compose/app/src
-                target: /org-src                    
+                source: ./compose/app/.build
+                target: /dist
+                    
