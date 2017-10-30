@@ -34,7 +34,7 @@ function createWindow() {
         autoUpdater.setFeedURL(feedUrl);
 
         autoUpdater
-            .addListener("update-downloaded",
+            .addListener("update-downloaded" as "update-not-available",
             (event: Event, releaseNotes: string, releaseName: string, releaseDate: string) => {
                 dialog.showMessageBox({
                     buttons: ["OK"],
@@ -44,7 +44,7 @@ function createWindow() {
                 win.webContents.send("update-downloaded", { event, releaseNotes, releaseName, releaseDate });
             });
 
-        autoUpdater.addListener("error", (error: Event) => {
+        autoUpdater.addListener("error" as "update-not-available", (error: Event) => {
             // TBD
         });
     } catch (e) {

@@ -12,6 +12,11 @@ const _ = require('lodash');
 const stringify = require('stringify');
 const scssify = require('scssify');
 
+require.cache[
+    Object.keys(require.cache)
+        .find((x) => x.indexOf('gulp-util/index') >= 0)
+].exports.colors.stripColor = require('strip-ansi')
+
 /**
  * Setups browserify pipeline for frontend frameworks
  * @param {string} entry

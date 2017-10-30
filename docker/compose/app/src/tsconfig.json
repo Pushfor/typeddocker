@@ -11,7 +11,8 @@
             "react",
             "react-dom",
             "react-redux",
-            "electron"
+            "electron",
+            "jquery"
         ],
         "module": "commonjs",
         "target": "es5",
