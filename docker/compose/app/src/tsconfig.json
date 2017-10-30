@@ -12,7 +12,8 @@
             "react-dom",
             "react-redux",
             "electron",
-            "jquery"
+            "jquery",
+            "jasmine"
         ],
         "module": "commonjs",
         "target": "es5",

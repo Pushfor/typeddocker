@@ -96,7 +96,26 @@
     "concat-stream": "1.6.0",
     "xtend": "4.0.1",
     "ms": "2.0.0",
-    "object-keys": "1.0.11"
+    "object-keys": "1.0.11",
+    "v8flags": "3.0.1",
+    "abbrev": "1.1.1",
+    "has-flag": "2.0.0",
+    "tsconfig": "6.0.0",
+    "esprima": "4.0.0",
+    "path-exists": "3.0.0",
+    "read-pkg-up": "2.0.0",
+    "find-up": "2.1.0",
+    "read-pkg": "2.0.0",
+    "load-json-file": "2.0.0",
+    "path-type": "2.0.0",
+    "string-width": "2.1.1",
+    "is-fullwidth-code-point": "2.0.0",
+    "strip-ansi": "4.0.0",
+    "ansi-regex": "3.0.0",
+    "os-locale": "2.1.0",
+    "cross-spawn": "5.1.0",
+    "which-module": "2.0.0",
+    "yargs-parser": "7.0.0"
   },
   "dependencies": {
     "@angular/animations": "^4.2.4",
@@ -112,6 +131,7 @@
     "@types/electron": "^1.6.10",
     "@types/forever-monitor": "^1.7.2",
     "@types/jquery": "^3.2.15",
+    "@types/jasmine": "^2.6.2",
     "@types/lodash": "^4.14.78",
     "@types/morgan": "^1.7.33",
     "@types/prop-types": "^15.5.2",
@@ -141,6 +161,8 @@
     "gulp-typescript": "^3.2.2",
     "gulp-uglify": "^3.0.0",
     "gulp-watch": "^4.3.11",
+    "istanbul": "^1.1.0-alpha.1",
+    "jasmine": "^2.8.0",
     "morgan": "^1.9.0",
     "ngx-cookie": "^1.0.0",
     "postcss": "^6.0.13",
@@ -155,6 +177,7 @@
     "rxjs": "^5.4.2",
     "scssify": "https://github.com/sielay/scssify.git#raw",
     "stringify": "^5.1.0",
+    "ts-node": "^3.3.0",
     "tsify": "^3.0.3",
     "tslint-react": "^3.2.0",
     "typescript": "^2.5.3",
@@ -169,6 +192,8 @@
     "tslint": "^5.8.0"
   },
   "scripts": {
-    "lint": "tslint \"apps/**/*.ts\""
+    "lint": "tslint \"apps/**/*.ts\"",
+    "test": "ts-node node_modules/jasmine/bin/jasmine.js JASMINE_CONFIG_PATH=jasmine.json",
+    "test:coverage": "ts-node node_modules/istanbul/lib/cli.js cover --all -e .ts  -x \"*.d.ts\" -x \"*.spec.ts\" node_modules/jasmine/bin/jasmine.js -- JASMINE_CONFIG_PATH=jasmine.json"
   }
 }
