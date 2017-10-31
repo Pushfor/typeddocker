@@ -44,6 +44,7 @@ before_script:
   - sudo chmod 777 -R ./compose/app/.build 
   - cp ./compose/app/.build/electron/desktop.js ./compose/app/.build/public/main.js
   - cp ./compose/app/src/package.json ./compose/app/.build/public  
+  - yarn global add electron
   - electron ./compose/app/.build/public
 script:
   - ../travis.test.sh
