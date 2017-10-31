@@ -1,33 +1,37 @@
 import * as jQuery from "jquery";
+/* tslint:disable:no-string-literal */
 window["$"] = window["jQuery"] = jQuery;
+/* tslint:enable:no-string-literal */
 import * as GoldenLayout from "golden-layout";
 
 const config = {
     content: [{
-        type: "row",
+
         content: [{
+            content: [{
+                componentName: "testComponent",
+                title: "Component 1",
+                type: "component",
+            }, {
+                componentName: "testComponent",
+                title: "Component 2",
+                type: "component",
+            }],
             type: "stack",
             width: 60,
-            content: [{
-                type: "component",
-                componentName: "testComponent",
-                title: "Component 1"
-            }, {
-                type: "component",
-                componentName: "testComponent",
-                title: "Component 2"
-            }]
         }, {
-            type: "column",
             content: [{
+
+                componentName: "testComponent",
                 type: "component",
-                componentName: "testComponent"
             }, {
+                componentName: "testComponent",
                 type: "component",
-                componentName: "testComponent"
-            }]
-        }]
-    }]
+            }],
+            type: "column",
+        }],
+        type: "row",
+    }],
 };
 
 const myLayout = new GoldenLayout(config);
