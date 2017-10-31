@@ -1,0 +1,19 @@
+server {
+
+  listen 443 ssl;
+  server_name DOMAIN_TO_BE_REPLACED;
+
+  ssl_certificate /etc/ssl/certs/key.chained.com;
+  ssl_certificate_key /etc/ssl/certs/private-key.key;
+
+  access_log /var/log/nginx/nodejs_project.log;
+  charset utf-8;
+
+  location / {
+    proxy_pass http://app:3003;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
+
+}

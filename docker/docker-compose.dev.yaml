@@ -21,3 +21,14 @@ services:
                 type: volume
                 source: ./compose/app/src
                 target: /org-src                    
+    nginx:
+        restart: always
+        build:
+            context: ./compose/nginx/
+            args:
+                - SETUP_DOMAIN=example.com
+
+        ports:
+            - "443:443"
+        links:
+            - node:node
