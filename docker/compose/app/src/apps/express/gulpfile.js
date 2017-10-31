@@ -4,7 +4,7 @@ const gulpSequence = require('gulp-sequence');
 const watch = require('gulp-watch');
 
 gulp.task('express:build', () => {
-    return ts('./apps/express/*.ts')
+    return ts('./apps/express/**/*.ts')
         .js
         .pipe(gulp.dest('../build/express'));
 });
