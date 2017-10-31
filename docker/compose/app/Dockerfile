@@ -16,6 +16,9 @@ VOLUME /dist
 RUN yarn global add gulp
 
 RUN yarn --flat --non-interactive; exit 0
+RUN yarn run lint
+RUN yarn run test:coverage
+
 RUN mkdir /build
 
 RUN ln -s /src/node_modules /build/node_modules
