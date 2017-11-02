@@ -34,10 +34,16 @@ const config = {
     }],
 };
 
-const myLayout = new GoldenLayout(config);
+const myLayout = new GoldenLayout(config, document.getElementById("layout"));
 
 myLayout.registerComponent("testComponent", (container, componentState) => {
     container.getElement().html("<h2>" + componentState.label + "</h2>");
 });
 
 myLayout.init();
+
+const picker = document.getElementById("layout-picker") as HTMLSelectElement;
+
+picker.addEventListener("change", (event) => {
+    document.body.className = "golden-layout " + picker.value;
+});
